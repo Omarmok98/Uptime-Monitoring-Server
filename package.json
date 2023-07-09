@@ -1,0 +1,28 @@
+{
+  "name": "uptime-monitoring-server",
+  "version": "1.0.0",
+  "description": "Monitor URLs, and get detailed uptime reports about their availability, average response time, and total uptime/downtime.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Omarmok98/Uptime-Monitoring-Server.git"
+  },
+  "author": "Omar Mokhtar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Omarmok98/Uptime-Monitoring-Server/issues"
+  },
+  "homepage": "https://github.com/Omarmok98/Uptime-Monitoring-Server#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "mongoose": "^7.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.44.0",
+    "eslint-config-google": "^0.14.0"
+  }
+}
