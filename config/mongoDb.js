@@ -8,10 +8,9 @@ const mongoUsername = process.env.MONGO_USERNAME;
 const mongoPassword = process.env.MONGO_PASS;
 const mongoHost = process.env.MONGO_HOST;
 const mongoPort = process.env.MONGO_PORT;
-const mongoDatabase = process.env.MONGO_DATBASE;
 
-const mongoConnectionString = `mongodb://${mongoUsername}:${mongoPassword}@${mongoHost}:${mongoPort}/${mongoDatabase}`;
-
+const mongoConnectionString = `mongodb://${mongoUsername}:${mongoPassword}@${mongoHost}:${mongoPort}/uptime_monitoring_server?authSource=admin`;
+console.log(mongoConnectionString);
 mongoose
   .connect(mongoConnectionString, options)
   .then(() => {
