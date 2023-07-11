@@ -25,7 +25,7 @@ class UserController {
         token,
       });
     }
-    return res.status(HTTP_STATUS.FORBIDDEN).json({
+    return res.status(HTTP_STATUS.UNAUTHORIZED).json({
       message: RESPONSE_MESSAGES.UNAUTHENTICATED_USER,
     });
   }
