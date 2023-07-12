@@ -1,4 +1,4 @@
-const usersRoute = require("../users/user-route");
+const usersRoute = require("../modules/users/user-route");
 const urlsRoute = require("../modules/urls/url-route");
 const reportsRoute = require("../modules/reports/report-route");
 

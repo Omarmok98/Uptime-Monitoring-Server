@@ -1,0 +1,20 @@
+version: "3.7"
+services:
+  uptime-monitoring-server:
+    image: omar/uptime-monitoring-server:latest
+    ports:
+      - "5000:5000"
+    networks:
+      - monitoring-server-network
+    environment:
+      MONGO_USERNAME: uptime_monitoring_server
+      MONGO_PASS: Test123!
+      MONGO_HOST: localhost
+      MONGO_PORT: 27017
+      MAIL_HOST: sandbox.smtp.mailtrap.io
+      MAIL_PORT: 587
+      MAIL_USERNAME: 2980fb398fbf0b
+      MAIL_PASSWORD: 37841e8485f60d
+      JWT_KEY: test
+networks:
+  monitoring-server-network: {}

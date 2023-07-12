@@ -1,4 +1,4 @@
-const UrlService = require("../urls/url-service");
+const UrlService = require("../modules/urls/url-service");
 const { HTTP_STATUS, RESPONSE_MESSAGES } = require("../constants/response");
 
 module.exports = async function (req, res, next) {

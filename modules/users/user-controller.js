@@ -1,8 +1,8 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { generateRandomNumbers } = require("../helpers/commonFunctions");
-const { HTTP_STATUS, RESPONSE_MESSAGES } = require("../constants/response");
-const { sendSignupConfirmation } = require("../config/mail");
+const { generateRandomNumbers } = require("../../helpers/commonFunctions");
+const { HTTP_STATUS, RESPONSE_MESSAGES } = require("../../constants/response");
+const { sendSignupConfirmation } = require("../../config/mail");
 const UserService = require("./user-service");
 
 class UserController {

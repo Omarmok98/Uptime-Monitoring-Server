@@ -21,9 +21,18 @@ const urlSchema = new mongoose.Schema({
   path: String,
   port: Number,
   webhook: String,
-  timeout: Number,
-  interval: Number,
-  threshold: Number,
+  timeout: {
+    type: Number,
+    default: 5, // Default timeout value in seconds
+  },
+  interval: {
+    type: Number,
+    default: 10, // Default interval value in minutes
+  },
+  threshold: {
+    type: Number,
+    default: 1, // Default threshold value
+  },
   username: String,
   password: String,
   httpHeaders: Object,

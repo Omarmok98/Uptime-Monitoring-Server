@@ -1,7 +1,7 @@
 const Joi = require("joi");
 const UserService = require("./user-service");
-const { removeQuotes } = require("../helpers/commonFunctions");
-const { HTTP_STATUS, RESPONSE_MESSAGES } = require("../constants/response");
+const { removeQuotes } = require("../../helpers/commonFunctions");
+const { HTTP_STATUS, RESPONSE_MESSAGES } = require("../../constants/response");
 
 class UserValidator {
   static async signup(req, res, next) {

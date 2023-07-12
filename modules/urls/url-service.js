@@ -33,7 +33,7 @@ class UrlService {
   }
 
   static async updateUrl(name, url) {
-    const newUrl = await Url.updateOne({ name }, url);
+    const newUrl = await Url.findOneAndUpdate({ name }, url, { new: true });
     return newUrl;
   }
 }
