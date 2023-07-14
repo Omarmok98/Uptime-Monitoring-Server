@@ -25,6 +25,16 @@ function sendSignupConfirmation(recipientEmail, verificationCode) {
   });
 }
 
+function sendAlert(recipientEmail, name) {
+  return transporter.sendMail({
+    from: process.env.MAIL_USERNAME,
+    to: [recipientEmail],
+    subject: "Url Alert",
+    html: `<p>Url with name ${name} is down</p>`,
+  });
+}
+
 module.exports = {
   sendSignupConfirmation,
+  sendAlert,
 };

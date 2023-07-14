@@ -1,5 +1,7 @@
 const { default: axios } = require("axios");
 const https = require("https");
+const UrlService = require("../urls/url-service");
+const { addDurationToAxiosInstance } = require("../../helpers/axios");
 
 class MonitoringWorker {
   constructor({
@@ -18,6 +20,7 @@ class MonitoringWorker {
     this.threshold = threshold;
     this.timeout = timeout * 1000; // 1000 ms is 1 second
     this.interval = interval * 60000; // 60000 ms is 1 minute
+    this.failureCounter = 0;
   }
   setPort({ port }) {
     this.port = port;
@@ -65,17 +68,18 @@ class MonitoringWorker {
         rejectUnauthorized: false,
       });
     }
+
     this.instance = axios.create(requestConfig);
+    addDurationToAxiosInstance(this.instance);
     return this;
   }
 
   start() {
-    console.log(this.baseURL);
     this.intervalId = setInterval(() => {
       this.instance
         .get(this.baseURL, this.requestConfig)
-        .then(async (response) => this.calculateMetrics(response))
-        .catch((error) => console.log(error));
+        .then(async (response) => this.calculateMetrics(response, true))
+        .catch(async (error) => this.calculateMetrics(error, false));
     }, this.interval);
     return this;
   }
@@ -84,8 +88,39 @@ class MonitoringWorker {
     clearInterval(this.intervalId);
   }
 
-  async calculateMetrics(response) {
-    console.log("collecting metrics ", this);
+  async calculateMetrics(response, status) {
+    const updateMetricsObject = {
+      "report.status": status,
+      $inc: {
+        "report.requestCount": 1,
+        "report.totalResponseTime": parseInt(response.duration),
+      },
+      $push: {
+        "report.history": new Date(),
+      },
+    };
+
+    if (!status) {
+      updateMetricsObject["$inc"] = {
+        ...updateMetricsObject["$inc"],
+        "report.outages": 1,
+        "report.downtime": parseInt(this.interval),
+      };
+      this.failureCounter++;
+      if (this.failureCounter > this.threshold) {
+        // send Alert
+      }
+    } else {
+      updateMetricsObject["$inc"] = {
+        ...updateMetricsObject["$inc"],
+        "report.uptime": parseInt(this.interval),
+      };
+    }
+
+    const result = await UrlService.updateMetrics(
+      this.name,
+      updateMetricsObject
+    );
   }
 }
 

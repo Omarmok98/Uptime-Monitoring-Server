@@ -34,7 +34,6 @@ class MonitoringWorkersManager {
   addNewWorkerToPool(url) {
     const monitoringWorker = this.createWorker(url).start();
     this.workersPool.set(url.name, monitoringWorker);
-    console.log(this.workersPool);
   }
 
   async initWorkers() {
@@ -46,13 +45,10 @@ class MonitoringWorkersManager {
     for (const url of urls) {
       this.addNewWorkerToPool(url);
     }
-    console.log(this.workersPool);
   }
 
   deleteWorker(name) {
-    console.log(name);
     const monitoringWorker = this.workersPool.get(name);
-    console.log(monitoringWorker);
     monitoringWorker.stop();
     return this.workersPool.delete(name);
   }

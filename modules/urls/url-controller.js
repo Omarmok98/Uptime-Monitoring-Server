@@ -6,9 +6,8 @@ class UrlController {
   static async createUrl(req, res) {
     const url = req.body;
     const email = req.user.email;
-    url.email = email;
+    url.user = email;
     const urlResult = await UrlService.createUrl(url);
-    console.log(urlResult);
     if (urlResult) {
       const manager = MonitoringWorkersManager.getInstance();
       manager.addNewWorkerToPool(urlResult);
@@ -40,7 +39,6 @@ class UrlController {
   static async deleteUrl(req, res) {
     const name = req.params.name;
     const urlResult = await UrlService.deleteUrl(name);
-    console.log(urlResult);
     if (urlResult) {
       const manager = MonitoringWorkersManager.getInstance();
       manager.deleteWorker(name);
@@ -59,7 +57,6 @@ class UrlController {
     const email = req.user.email;
     url.email = email;
     const urlResult = await UrlService.updateUrl(name, url);
-    console.log(urlResult);
     if (urlResult) {
       const manager = MonitoringWorkersManager.getInstance();
       manager.updateWorker(name, urlResult);
@@ -69,6 +66,33 @@ class UrlController {
     }
     return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
       message: RESPONSE_MESSAGES.URL_DELETION_ERROR,
+    });
+  }
+
+  // reports Specific controllers
+  static async getReport(req, res) {
+    const name = req.params.name;
+    const reportResult = await UrlService.getReport(name);
+    return res.status(HTTP_STATUS.OK).json({
+      data: reportResult,
+    });
+  }
+
+  static async getReports(req, res) {
+    const { email } = req.user;
+    console.log("asaa");
+    const reportResult = await UrlService.getReports(email);
+    return res.status(HTTP_STATUS.OK).json({
+      data: reportResult,
+    });
+  }
+
+  static async getReportsByTag(req, res) {
+    const { email } = req.user;
+    const tag = req.params.tag;
+    const reportResult = await UrlService.getReportByTag(email, tag);
+    return res.status(HTTP_STATUS.OK).json({
+      data: reportResult,
     });
   }
 }

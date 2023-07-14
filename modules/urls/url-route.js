@@ -7,6 +7,15 @@ const router = express.Router();
 
 router.get("/", [authentication], UrlController.getUrls);
 
+router.get(
+  "/:name/report",
+  [authentication, authorization],
+  UrlController.getReport
+);
+router.get("/reports", [authentication], UrlController.getReports);
+
+router.get("/tag/:tag/report", [authentication], UrlController.getReportsByTag);
+
 router.get("/:name", [authentication, authorization], UrlController.getUrl);
 
 router.post(
