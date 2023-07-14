@@ -1,6 +1,8 @@
 const { default: axios } = require("axios");
 const https = require("https");
 const UrlService = require("../urls/url-service");
+const AlertFactory = require("../alerts/alert-factory");
+const alertEventEmitter = require("../alerts/alert-event-emitter");
 const { addDurationToAxiosInstance } = require("../../helpers/axios");
 
 class MonitoringWorker {
@@ -39,6 +41,13 @@ class MonitoringWorker {
   }
   setPath({ path }) {
     this.path = path;
+    return this;
+  }
+  addAlerts({ alerts }) {
+    const alertFactory = new AlertFactory();
+    for (const alert of alerts) {
+      this.alerts.push(alertFactory.createAlert(alert.type, alert.config));
+    }
     return this;
   }
   #createBaseURL() {
@@ -108,7 +117,7 @@ class MonitoringWorker {
       };
       this.failureCounter++;
       if (this.failureCounter > this.threshold) {
-        // send Alert
+        alertEventEmitter.emit("notification", this.name, this.alerts);
       }
     } else {
       updateMetricsObject["$inc"] = {

@@ -4,6 +4,7 @@ class EmailAlert {
     this.email = email;
   }
   async sendNotification(url) {
+    console.log("SENDING EMAIL ALERT");
     sendAlert(this.email, url.name);
   }
 }

@@ -27,6 +27,9 @@ class MonitoringWorkersManager {
     if (url.path) {
       monitoringWorker.setPath(url);
     }
+    if (url.alerts) {
+      monitoringWorker.addAlerts(url);
+    }
     monitoringWorker.createAxiosInstance();
     return monitoringWorker;
   }
