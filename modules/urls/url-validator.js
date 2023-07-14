@@ -18,6 +18,7 @@ const urlBaseSchema = Joi.object({
   statusCode: Joi.number(),
   tags: Joi.array().items(Joi.string()),
   ignoreSSL: Joi.boolean().required(),
+  alerts: Joi.object().optional(),
 });
 
 class UrlValidator {
