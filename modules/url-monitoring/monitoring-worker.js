@@ -23,6 +23,7 @@ class MonitoringWorker {
     this.timeout = timeout * 1000; // 1000 ms is 1 second
     this.interval = interval * 60000; // 60000 ms is 1 minute
     this.failureCounter = 0;
+    this.alerts = [];
   }
   setPort({ port }) {
     this.port = port;
@@ -44,9 +45,8 @@ class MonitoringWorker {
     return this;
   }
   addAlerts({ alerts }) {
-    const alertFactory = new AlertFactory();
     for (const alert of alerts) {
-      this.alerts.push(alertFactory.createAlert(alert.type, alert.config));
+      this.alerts.push(AlertFactory.createAlert(alert.type, alert.config));
     }
     return this;
   }

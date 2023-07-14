@@ -4,7 +4,6 @@ const { HTTP_STATUS, RESPONSE_MESSAGES } = require("../constants/response");
 module.exports = async function (req, res, next) {
   const user = req.user;
   const urlName = req.params.name;
-  console.log(user);
   const url = await UrlService.getUrl(urlName);
   if (!url) {
     return res

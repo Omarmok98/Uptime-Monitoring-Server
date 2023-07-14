@@ -3,9 +3,9 @@ class EmailAlert {
   constructor({ email }) {
     this.email = email;
   }
-  async sendNotification(url) {
+  async sendNotification(urlName) {
     console.log("SENDING EMAIL ALERT");
-    sendAlert(this.email, url.name);
+    sendAlert(this.email, urlName);
   }
 }
 

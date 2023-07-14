@@ -23,6 +23,7 @@ class UrlService {
     };
   }
   static async createUrl(url) {
+    console.log(url);
     url.report = {}; // adding report so that default values can be inserted
     const newUrl = new Url(url);
     const result = await newUrl.save();
