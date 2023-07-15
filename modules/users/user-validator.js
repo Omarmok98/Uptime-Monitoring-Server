@@ -1,6 +1,6 @@
 const Joi = require("joi");
 const UserService = require("./user-service");
-const { removeQuotes } = require("../../helpers/commonFunctions");
+const { removeQuotes } = require("../../helpers/common-functions");
 const { HTTP_STATUS, RESPONSE_MESSAGES } = require("../../constants/response");
 
 class UserValidator {

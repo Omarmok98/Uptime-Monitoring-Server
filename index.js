@@ -1,13 +1,11 @@
 require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
-const errorHandler = require("./middlewares/errorHandler");
 const MonitoringWorkersManager = require("./modules/url-monitoring/monitoring-worker-manager");
 require("./config/mongoDb");
 
 const app = express();
 app.use(bodyParser.json());
-app.use(errorHandler);
 
 require("./routes/index")(app);
 

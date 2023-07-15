@@ -1,7 +1,7 @@
 const Joi = require("joi");
 const UrlService = require("./url-service");
 const { RESPONSE_MESSAGES, HTTP_STATUS } = require("../../constants/response");
-const { removeQuotes } = require("../../helpers/commonFunctions");
+const { removeQuotes } = require("../../helpers/common-functions");
 
 const urlBaseSchema = Joi.object({
   url: Joi.string().required(),
