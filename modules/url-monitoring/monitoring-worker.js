@@ -126,10 +126,7 @@ class MonitoringWorker {
       };
     }
 
-    const result = await UrlService.updateMetrics(
-      this.name,
-      updateMetricsObject
-    );
+    await UrlService.updateMetrics(this.name, updateMetricsObject);
   }
 }
 

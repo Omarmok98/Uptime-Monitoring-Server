@@ -1,4 +1,4 @@
-var Pushover = require("node-pushover");
+const Pushover = require("node-pushover");
 
 class PushoverAlert {
   constructor({ token, user }) {
