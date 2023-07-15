@@ -5,6 +5,7 @@ Monitor URLs, and get detailed uptime reports about their availability, average 
 ## Table of Contents
 
 - [Installation](#installation)
+- [Environment-Variables](#Environment-Variables)
 - [Usage](#usage)
 - [Scripts](#scripts)
 - [Dependencies](#dependencies)
@@ -23,6 +24,18 @@ To install the Uptime Monitoring Server, follow these steps:
 1. Clone the repository: `git clone https://github.com/Omarmok98/Uptime-Monitoring-Server.git`
 2. Navigate to the project directory: `cd Uptime-Monitoring-Server`
 3. Install the dependencies: `npm install`
+
+## Environment-Variables
+
+- `MONGO_USERNAME`: The username of the Mongodb database.
+- `MONGO_PASS`: The password of the username.
+- `MONGO_HOST`: The address of mongodb database server.
+- `MONGO_PORT`: The port of the mongodb database server.
+- `JWT_SECRET`: Secret key used for JSON Web Token (JWT) authentication.
+- `MAIL_HOST`: The SMTP server hostname.
+- `MAIL_PORT`: The port of the SMTP server.
+- `EMAIL_USERNAME`: Username of the email account used for sending notifications.
+- `EMAIL_PASSWORD`: Password of the email account used for sending notifications.
 
 ## Usage
 
