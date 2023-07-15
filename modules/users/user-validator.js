@@ -48,12 +48,12 @@ class UserValidator {
     }
     const existingUser = await UserService.getUser(user.email);
     if (!existingUser) {
-      return res.status(HTTP_STATUS.UNAUTHENTICATED_USER).json({
+      return res.status(HTTP_STATUS.UNAUTHORIZED).json({
         message: RESPONSE_MESSAGES.UNAUTHENTICATED_USER,
       });
     }
     if (!existingUser.verified) {
-      return res.status(HTTP_STATUS.UNAUTHENTICATED_USER).json({
+      return res.status(HTTP_STATUS.UNAUTHORIZED).json({
         message: RESPONSE_MESSAGES.UNVERIFIED_USER,
       });
     }
