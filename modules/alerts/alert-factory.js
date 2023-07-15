@@ -1,4 +1,5 @@
 const EmailAlert = require("./email-alert");
+const PushoverAlert = require("./pushover-alert");
 const WebhookAlert = require("./webhook-alert");
 
 class AlertFactory {
@@ -9,6 +10,8 @@ class AlertFactory {
         return new EmailAlert(alertConfig);
       case "webhook":
         return new WebhookAlert(alertConfig);
+      case "pushover":
+        return new PushoverAlert(alertConfig);
       default:
         throw new Error("Invalid alert type");
     }

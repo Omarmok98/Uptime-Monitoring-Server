@@ -5,8 +5,6 @@ class WebhookAlert {
     this.webhook = webhook;
   }
   async sendNotification(urlName) {
-    console.log(this.webhook);
-    console.log("SENDING WEBHOOK ALERT");
     await axios.get(this.webhook);
   }
 }
