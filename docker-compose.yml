@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   uptime-monitoring-server:
-    image: omar/uptime-monitoring-server:latest
+    image: uptime-monitoring-server:latest
     ports:
       - "5000:5000"
     networks:

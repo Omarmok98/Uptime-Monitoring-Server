@@ -1,5 +1,3 @@
-# Uptime-Monitoring-Server
-
 # Uptime Monitoring Server
 
 Monitor URLs, and get detailed uptime reports about their availability, average response time, and total uptime/downtime.
@@ -16,6 +14,7 @@ Monitor URLs, and get detailed uptime reports about their availability, average 
 - [Bugs](#bugs)
 - [Repository](#repository)
 - [Homepage](#homepage)
+- [Docker](#docker)
 
 ## Installation
 
@@ -84,3 +83,25 @@ To install these dev dependencies, run the following command:
 ```bash
 npm install --save-dev
 ```
+
+## Docker
+
+Build the Docker image with the following command:
+
+```bash
+docker build -t uptime-monitoring-server .
+```
+
+Run the Docker container:
+
+```bash
+docker run --env-file .env /uptime-monitoring-server
+```
+
+Run the docker container using docker compose:
+
+```bash
+docker compose up -d
+```
+
+The server will be accessible on port 5000 within the Docker container. You can map it to a different port on your local machine by modifying the `-p` option in the `docker run` command.
