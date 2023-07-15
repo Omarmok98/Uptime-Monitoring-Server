@@ -4,11 +4,10 @@ class UrlService {
     const uptimeInSec = parseInt(report.uptime / 1000);
     const downtimeInSec = parseInt(report.downtime / 1000);
     const totalResponseTimeInSec = parseInt(report.totalResponseTime / 1000);
-    const responseTime = parseFloat(
-      report.totalResponseTime / parseInt(report.requestCount)
-    );
+    const responseTime =
+      parseFloat(report.totalResponseTime / parseInt(report.requestCount)) || 0;
     const availability =
-      parseFloat(report.uptime / report.downtime + report.uptime) * 100;
+      parseFloat(report.uptime / report.downtime + report.uptime) * 100 || 0;
     return {
       name: name,
       status: report.status,
@@ -23,7 +22,6 @@ class UrlService {
     };
   }
   static async createUrl(url) {
-    console.log(url);
     url.report = {}; // adding report so that default values can be inserted
     const newUrl = new Url(url);
     const result = await newUrl.save();
@@ -36,12 +34,12 @@ class UrlService {
   }
 
   static async getUrls() {
-    const urls = await Url.find().select("-_id -report").lean();
+    const urls = await Url.find().select("-_id -report -__v").lean();
     return urls;
   }
 
   static async getUrlsByEmail(user) {
-    const urls = await Url.find({ user }).select("-_id -report").lean();
+    const urls = await Url.find({ user }).select("-_id -report -__v").lean();
     return urls;
   }
   static async deleteUrl(name) {
@@ -55,8 +53,8 @@ class UrlService {
   }
 
   // report specific methods
-  static async getReportByTag(user, tag) {
-    const reports = await Url.find({ user, tag })
+  static async getReportByTag(user, tags) {
+    const reports = await Url.find({ user, tags })
       .select("-_id name report")
       .lean();
     const result = [];
@@ -85,8 +83,10 @@ class UrlService {
   static async updateMetrics(name, metricsQuery) {
     const updateMetricsResult = await Url.findOneAndUpdate(
       { name },
-      metricsQuery
+      metricsQuery,
+      { new: true }
     );
+    console.log(updateMetricsResult);
     return updateMetricsResult;
   }
 }

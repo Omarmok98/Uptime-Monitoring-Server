@@ -80,7 +80,6 @@ class UrlController {
 
   static async getReports(req, res) {
     const { email } = req.user;
-    console.log("asaa");
     const reportResult = await UrlService.getReports(email);
     return res.status(HTTP_STATUS.OK).json({
       data: reportResult,
