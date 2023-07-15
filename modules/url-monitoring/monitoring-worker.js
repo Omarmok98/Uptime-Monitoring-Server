@@ -70,7 +70,7 @@ class MonitoringWorker {
       requestConfig.headers = this.headers;
     }
     if (this.auth) {
-      requestConfig.auth = auth;
+      requestConfig.auth = this.auth;
     }
     if (this.ignoreSSL) {
       requestConfig.httpsAgent = new https.Agent({

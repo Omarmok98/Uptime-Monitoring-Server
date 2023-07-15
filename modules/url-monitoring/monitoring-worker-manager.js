@@ -52,8 +52,12 @@ class MonitoringWorkersManager {
 
   deleteWorker(name) {
     const monitoringWorker = this.workersPool.get(name);
-    monitoringWorker.stop();
-    return this.workersPool.delete(name);
+    if (monitoringWorker) {
+      monitoringWorker.stop();
+      this.workersPool.delete(name);
+      return true;
+    }
+    return false;
   }
 
   updateWorker(oldUrlName, url) {

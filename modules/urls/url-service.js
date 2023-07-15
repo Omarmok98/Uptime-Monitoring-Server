@@ -86,7 +86,6 @@ class UrlService {
       metricsQuery,
       { new: true }
     );
-    console.log(updateMetricsResult);
     return updateMetricsResult;
   }
 }

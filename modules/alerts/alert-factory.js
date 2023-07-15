@@ -6,7 +6,6 @@ class AlertFactory {
   static createAlert(alertType, alertConfig) {
     switch (alertType) {
       case "email":
-        console.log(alertConfig);
         return new EmailAlert(alertConfig);
       case "webhook":
         return new WebhookAlert(alertConfig);
